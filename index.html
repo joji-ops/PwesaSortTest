@@ -114,7 +114,7 @@
     </main>
 
     <footer class="app-footer">
-      <p>Camera &amp; sorting are local. OCR uses free OCR.space API (your data is not stored).</p>
+      <p>Sorting and merging happen locally in your browser. Scanned images are sent to the free OCR.space API for text recognition.</p>
     </footer>
   </div>
 
@@ -123,35 +123,46 @@
     <div class="modal">
       <h3>Scanning Image…</h3>
       <div class="spinner"></div>
-      <p id="ocrModalText">Processing with OCR...</p>
+      <p id="ocrModalText">Uploading image to OCR service...</p>
       <button class="btn btn-secondary" id="ocrCancelBtn">Cancel</button>
+    </div>
+  </div>
+
+  <!-- OCR Review Modal -->
+  <div class="modal-overlay" id="reviewModal" hidden>
+    <div class="modal review-modal">
+      <h3>Review Detected Numbers</h3>
+      <p class="review-subtitle">Check, edit, add, or remove numbers before they're filled in.</p>
+      <div class="review-list" id="reviewList"></div>
+      <button class="btn btn-secondary" id="reviewAddBtn">➕ Add number</button>
+      <div class="review-actions">
+        <button class="btn btn-secondary" id="reviewCancelBtn">Cancel</button>
+        <button class="btn btn-primary" id="reviewConfirmBtn">Fill Fields</button>
+      </div>
     </div>
   </div>
 
   <!-- Settings Modal -->
   <div class="modal-overlay" id="settingsModal" hidden>
-    <div class="modal" style="max-width: 460px;">
+    <div class="modal settings-modal">
       <h3>OCR Settings</h3>
-      <p>Get your free API key at <a href="https://ocr.space/ocrapi" target="_blank" style="color:var(--primary)">ocr.space/ocrapi</a> (free, no card)</p>
-      <input type="text" id="apiKeyInput" placeholder="Paste your OCR.space API Key here" style="width: 100%; padding: 14px; margin: 16px 0; border-radius: 10px; border: 1px solid var(--border); font-size: 1rem;" />
-      <div style="display: flex; gap: 12px; justify-content: center; margin-top: 8px;">
-        <button class="btn btn-secondary" id="settingsCancelBtn">Cancel</button>
-        <button class="btn btn-primary" id="settingsSaveBtn">Save Key</button>
+      <p class="review-subtitle">
+        Numbers are scanned using the free
+        <a href="https://ocr.space/ocrapi" target="_blank" rel="noopener">OCR.space</a>
+        API. Get your own free API key (25,000 requests/month) and paste it below so scans
+        use your own quota.
+      </p>
+      <label for="ocrApiKeyInput">OCR.space API Key</label>
+      <div class="input-row">
+        <input type="text" id="ocrApiKeyInput" placeholder="e.g. K8XXXXXXXXXXXXX" />
       </div>
-    </div>
-  </div>
-
-  <!-- Review Modal -->
-  <div class="modal-overlay" id="reviewModal" hidden>
-    <div class="modal" style="max-width: 520px; width: 92%;">
-      <h3>Review Detected Numbers</h3>
-      <p id="reviewStatus" style="margin: 8px 0 16px; color: var(--muted); font-weight: 500;"></p>
-      
-      <div id="reviewList" style="max-height: 380px; overflow-y: auto; padding: 8px; border: 1px solid var(--border); border-radius: 12px; background: var(--field-bg);"></div>
-      
-      <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px;">
-        <button class="btn btn-secondary" id="reviewCancelBtn">Cancel</button>
-        <button class="btn btn-primary" id="reviewAcceptBtn">✅ Accept & Fill Fields</button>
+      <p class="review-subtitle">
+        Leave blank to use the shared demo key (<code>helloworld</code>) — works for light use, but is rate
+        limited by OCR.space across all users.
+      </p>
+      <div class="review-actions">
+        <button class="btn btn-secondary" id="settingsCancelBtn">Cancel</button>
+        <button class="btn btn-primary" id="settingsSaveBtn">Save</button>
       </div>
     </div>
   </div>
